@@ -1,0 +1,180 @@
+<!DOCTYPE HTML>
+<html class="no-js">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>登录</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="stylesheet" href="public/css/normalize.css?v=13.12.12">
+    <link rel="stylesheet" href="public/css/grid.css?v=13.12.12">
+    <link rel="stylesheet" href="public/css/style.css?v=13.12.12">
+    <!--[if lt IE 9]>
+    <script src="public/js/html5shiv.js?v=13.12.12"></script>
+    <script src="public/js/respond.js?v=13.12.12"></script>
+    <![endif]-->
+</head>
+<body class="body-100">
+    <!--[if lt IE 9]>
+    <div class="message error browsehappy">
+        当前网页 <strong>不支持</strong>
+        你正在使用的浏览器. 为了正常的访问, 请
+        <a href="http://browsehappy.com/">升级你的浏览器</a>
+        .
+    </div>
+    <![endif]-->
+    <div class="typecho-login-wrap">
+        <div class="typecho-login" style="text-align:left">
+            <p class="more-link" style="text-align:right">
+                <a href="/">返回首页>></a>
+            </p>
+            <form action="/signIn" method="post" name="login" role="form">
+            <span class="text-error" id="error-text">{{.flash.error}}</span>
+                <p>
+                    <label for="name" class="sr-only">邮箱</label>
+                    <input type="text" id="email" name="email" value="" placeholder="邮箱" class="text-l w-100" />
+                    <span class="text-error">{{.errors.email.Message}}</span>
+                </p>
+                <p>
+                    <label for="password" class="sr-only">密码</label>
+                    <input type="password" id="password" name="password" class="text-l w-100" placeholder="密码" />
+                </p>
+                <p class="submit">
+                    <button type="submit" class="btn-l w-100 primary">登录</button>
+                    <input type="hidden" name="referer" value="" />
+                </p>
+                <p>
+                    <label for="remember">
+                        <input type="checkbox" name="remember" class="checkbox" value="1" id="remember" />
+                        记住我
+                    </label>
+                </p>
+                <p class=>
+                    <a href="">忘记密码？</a>
+                </p>
+                <p>使用以下账户登录</p>
+                <p>
+                    <a>QQ</a>
+                    |
+                    <a>新浪邮箱</a>
+                    |
+                    <a>人人网</a>
+                </p>
+            </form>          
+        </div>
+    </div>
+    <script src="public/js/jquery-1.9.1.min.js?v=13.12.12"></script>
+    <script src="public/js/jquery-ui.js?v=13.12.12"></script>
+    <script src="public/js/typecho.js?v=13.12.12"></script>
+    <script>
+    (function () {
+        $(document).ready(function() {
+            // 处理消息机制
+            (function () {
+                var prefix = '947b4c8224db72d6b3e22c1fa0187a72',
+                    cookies = {
+                        notice      :   $.cookie(prefix + '__typecho_notice'),
+                        noticeType  :   $.cookie(prefix + '__typecho_notice_type'),
+                        highlight   :   $.cookie(prefix + '__typecho_notice_highlight')
+                    },
+                    path = '/blog/';
+
+                if (!!cookies.notice && 'success|notice|error'.indexOf(cookies.noticeType) >= 0) {
+                    var head = $('.typecho-head-nav'),
+                        p = $('<div class="message popup ' + cookies.noticeType + '">'
+                        + '<ul><li>' + $.parseJSON(cookies.notice).join('</li><li>') 
+                        + '</li></ul></div>'), offset = 0;
+
+                    if (head.length > 0) {
+                        p.insertAfter(head);
+                        offset = head.outerHeight();
+                    } else {
+                        p.prependTo(document.body);
+                    }
+
+                    function checkScroll () {
+                        if ($(window).scrollTop() >= offset) {
+                            p.css({
+                                'position'  :   'fixed',
+                                'top'       :   0
+                            });
+                        } else {
+                            p.css({
+                                'position'  :   'absolute',
+                                'top'       :   offset
+                            });
+                        }
+                    }
+
+                    $(window).scroll(function () {
+                        checkScroll();
+                    });
+
+                    checkScroll();
+
+                    p.slideDown(function () {
+                        var t = $(this), color = '#C6D880';
+                        
+                        if (t.hasClass('error')) {
+                            color = '#FBC2C4';
+                        } else if (t.hasClass('notice')) {
+                            color = '#FFD324';
+                        }
+
+                        t.effect('highlight', {color : color})
+                            .delay(5000).slideUp(function () {
+                            $(this).remove();
+                        });
+                    });
+
+                    
+                    $.cookie(prefix + '__typecho_notice', null, {path : path});
+                    $.cookie(prefix + '__typecho_notice_type', null, {path : path});
+                }
+
+                if (cookies.highlight) {
+                    $('#' + cookies.highlight).effect('highlight', 1000);
+                    $.cookie(prefix + '__typecho_notice_highlight', null, {path : path});
+                }
+            })();
+
+
+            // 导航菜单 tab 聚焦时展开下拉菜单
+            (function () {
+                $('#typecho-nav-list').find('.parent a').focus(function() {
+                    $('#typecho-nav-list').find('.child').hide();
+                    $(this).parents('.root').find('.child').show();
+                });
+                $('#typecho-nav-list').find('.child li:last-child a').blur(function() {
+                    $(this).parents('.child').hide();
+                });
+            })();
+
+
+            if ($('.typecho-login').length == 0) {
+                $('a').each(function () {
+                    var t = $(this), href = t.attr('href');
+
+                    if ((href.length > 1 && href[0] == '#')
+                        || /^http\:\/\/blog\.fuxingwang\.cn\/blog\/admin\/.*$/.exec(href) 
+                            || /^http\:\/\/blog\.fuxingwang\.cn\/blog\/action\/[_a-zA-Z0-9\/]+.*$/.exec(href)) {
+                        return;
+                    }
+
+                    t.attr('target', '_blank');
+                });
+            }
+        });
+    })();
+</script>
+    <script>
+$(document).ready(function () {
+    $('#email').focus();
+});
+</script>
+</body>
+</html>
+{{if eq .RunMode "dev"}}
+    {{template "debug.html" .}}
+{{end}}

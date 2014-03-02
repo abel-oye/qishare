@@ -1,0 +1,81 @@
+<!DOCTYPE HTML>
+<html class="no-js">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>注册</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="stylesheet" href="public/css/normalize.css?v=13.12.12">
+    <link rel="stylesheet" href="public/css/grid.css?v=13.12.12">
+    <link rel="stylesheet" href="public/css/style.css?v=13.12.12">
+    <!--[if lt IE 9]>
+    <script src="public/js/html5shiv.js?v=13.12.12"></script>
+    <script src="public/js/respond.js?v=13.12.12"></script>
+    <![endif]-->
+</head>
+<body class="body-100">
+    <!--[if lt IE 9]>
+    <div class="message error browsehappy">
+        当前网页 <strong>不支持</strong>
+        你正在使用的浏览器. 为了正常的访问, 请
+        <a href="http://browsehappy.com/">升级你的浏览器</a>
+        .
+    </div>
+    <![endif]-->
+    <div class="typecho-login-wrap">
+        <div class="typecho-login" style="text-align:left">
+            <p class="more-link" style="text-align:right">
+                <a href="/">返回首页>></a>
+            </p>
+            <form action="/signUp" method="post" name="login" role="form">
+                <span class="text-error" id="error-text">{{.flash.error}}</span>
+                <p>
+                    {{with $field := field "user.UserName" .}}
+                    <label for="name" class="sr-only">用户名</label>
+                    <input type="text" id="{{$field.Name}}" name="{{$field.Name}}" value="" placeholder="用户名" class="text-l w-100" />
+                     <span class="text-error">{{ $field.Error}}</span>
+                     {{end}}
+                </p>
+                <p>
+                {{with $field := field "user.Email" .}}
+                    <label for="name" class="sr-only">邮箱</label>
+                    <input type="text" id="{{$field.Name}}" name="{{$field.Name}}" value="" placeholder="邮箱" class="text-l w-100" />
+                     <span class="text-error">{{ $field.Error}}</span>
+                       {{end}}
+                </p>
+                <p>
+                {{with $field := field "user.Password" .}}
+                    <label for="password" class="sr-only">密码</label>
+                    <input type="password" id="{{$field.Name}}" name="{{$field.Name}}" class="text-l w-100" placeholder="密码" />
+                     <span class="text-error">{{ $field.Error}}</span>
+                       {{end}}
+                </p>
+                <p>
+                {{with $field := field "user.AffirmPassword" .}}
+                    <label for="password" class="sr-only">密码确认</label>
+                    <input type="password" id="{{$field.Name}}" name="{{$field.Name}}" class="text-l w-100" placeholder="密码确认" />
+                     <span class="text-error">{{ $field.Error}}</span>
+                       {{end}}
+                </p>
+                <p class="submit">
+                    <button type="submit" class="btn-l w-100 primary">快速注册</button>
+                    <input type="hidden" name="referer" value="" />
+                </p>
+            </form>
+        </div>
+    </div>
+    <script src="public/js/jquery-1.9.1.min.js?v=13.12.12"></script>
+    <script src="public/js/jquery-ui.js?v=13.12.12"></script>
+    <script src="public/js/typecho.js?v=13.12.12"></script>
+    <script>
+    $(document).ready(function () {
+        $('#userName').focus();
+    });
+    </script>
+</body>
+</html>
+{{if eq .RunMode "dev"}}
+    {{template "debug.html" .}}
+{{end}}

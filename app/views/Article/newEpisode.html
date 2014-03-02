@@ -1,0 +1,238 @@
+{{set . "title" "齐享-向世界齐分享"}}
+{{template "header.html" .}}
+<link rel="stylesheet" href="/public/css/style.css?v=13.12.12">
+<style>
+  .primary:hover {
+-webkit-transition-duration: .4s;
+-moz-transition-duration: .4s;
+-o-transition-duration: .4s;
+transition-duration: .4s;
+background-color: #3c6a81;
+}
+.primary {
+border: none;
+background-color: #428bca;
+cursor: pointer;
+-webkit-border-radius: 2px;
+-moz-border-radius: 2px;
+-ms-border-radius: 2px;
+-o-border-radius: 2px;
+border-radius: 2px;
+color: #FFF;
+}
+.btn-l {
+height: 30px;
+font-size: 1.14286em;
+font-weight: bold;
+}
+.w-100 {
+width: 100%;
+}
+.w-fixed-500{
+  width:500px;
+}
+</style>
+<div class="container" style="margin-top:50px" >
+  <div class="row">
+
+    <div class="col-md-8" role="main">
+      <h4 class="page-header">新增段子</h4>
+      <form action="/episode/new" method="post" name="newEpisode" role="form" enctype="multipart/form-data" >
+            <span class="text-error" id="error-text">{{.flash.error}}</span>
+                <p>
+                   {{with $field := field "episode.Title" .}}
+                    <label for="name" class="sr-only">标题</label>
+                    <input type="text" id="{{$field.Name}}" name="{{$field.Name}}" value="" placeholder="标题" class="text-l w-fixed-500" />
+                   
+                    {{end}}
+                </p>
+                <p>
+                   {{with $field := field "episode.Tag" .}}
+                    <label for="password" class="sr-only">标签</label>
+                    <input type="text" id="{{$field.Name}}" name="{{$field.Name}}" class="text-l w-fixed-500" placeholder="标签" />
+                    {{end}}
+                </p>
+                <p>
+                  #段子# #段子# #段子# #段子#
+                </p>
+                <p>
+                   {{with $field := field "episode.Content" .}}
+                     <label for="password" class="sr-only">内容</label>
+                    <textarea id="{{$field.Name}}" name="{{$field.Name}}" class="editcontent" rows="20" cols="120"></textarea>
+                   {{end}}
+                </p>
+                <p>
+                <input name="attach" type="file">
+                </p>
+                <p class="submit">
+                    <button type="submit" class="btn-l   primary" style="width:50px">发布</button>
+                    <input type="hidden" name="referer" value="" />
+                </p>
+            </form>
+  </div>
+  <!-- end #col-md-8 -->
+  <div class="col-md-3 col-md-offset-1" style="margin-top:50px">
+    <div class="list-group">
+      <button type="button" class="btn-l w-100 primary" onclick="window.location='/episode/new'">新增段子</button>
+    </div>
+
+    <div class="list-group">
+      <a class="list-group-item active">标签</a>
+      <a class="list-group-item" href="http://blog.fuxingwang.cn/blog/tag/typecho/">
+        typecho
+        <span class="badge pull-right">2</span>
+      </a>
+      <a class="list-group-item" href="http://blog.fuxingwang.cn/blog/tag/Ambari/">
+        Ambari
+        <span class="badge pull-right">2</span>
+      </a>
+      <a class="list-group-item" href="http://blog.fuxingwang.cn/blog/tag/%E8%AF%BB%E4%B9%A6/">
+        读书
+        <span class="badge pull-right">2</span>
+      </a>
+      <a class="list-group-item" href="http://blog.fuxingwang.cn/blog/tag/bootstrap/">
+        bootstrap
+        <span class="badge pull-right">2</span>
+      </a>
+      <a class="list-group-item" href="http://blog.fuxingwang.cn/blog/tag/Linux/">
+        Linux
+        <span class="badge pull-right">1</span>
+      </a>
+      <a class="list-group-item" href="http://blog.fuxingwang.cn/blog/tag/%E6%8F%92%E4%BB%B6/">
+        插件
+        <span class="badge pull-right">1</span>
+      </a>
+      <a class="list-group-item" href="http://blog.fuxingwang.cn/blog/tag/%E4%BA%BA%E7%89%A9%E4%BC%A0%E8%AE%B0/">
+        人物传记
+        <span class="badge pull-right">1</span>
+      </a>
+      <a class="list-group-item" href="http://blog.fuxingwang.cn/blog/tag/hadoop/">
+        hadoop
+        <span class="badge pull-right">1</span>
+      </a>
+      <a class="list-group-item" href="http://blog.fuxingwang.cn/blog/tag/perl-ssl-LWP/">
+        perl ssl LWP
+        <span class="badge pull-right">1</span>
+      </a>
+      <a class="list-group-item" href="http://blog.fuxingwang.cn/blog/tag/github-%E5%A9%9A%E7%A4%BC/">
+        github 婚礼
+        <span class="badge pull-right">1</span>
+      </a>
+      <a class="list-group-item" href="http://blog.fuxingwang.cn/blog/tag/%E6%97%A5%E5%BF%97/">
+        日志
+        <span class="badge pull-right">1</span>
+      </a>
+      <a class="list-group-item" href="http://blog.fuxingwang.cn/blog/tag/%E7%90%86%E8%B4%A2/">
+        理财
+        <span class="badge pull-right">1</span>
+      </a>
+      <a class="list-group-item" href="http://blog.fuxingwang.cn/blog/tag/%E8%AF%97%E8%AF%8D/">
+        诗词
+        <span class="badge pull-right">1</span>
+      </a>
+    </div>
+
+    <div class="list-group">
+      <a class="list-group-item active">友情链接</a>
+      <a href="http://w.fuxingwang.cn" class="list-group-item" title="chrisfoon的婚礼纪念站" target="_blank">婚礼站点</a>
+      <a href="http://mchou.net" class="list-group-item" title="" target="_blank">莫愁</a>
+      <a href="http://tech.mclarian.com/" class="list-group-item" title="" target="_blank">Tech && Test</a>
+      <a href="http://www.plusmusic.org/" class="list-group-item" title="" target="_blank">M+</a>
+    </div>
+
+    <div class="list-group">
+      <a class="list-group-item active">最新文章</a>
+      <a class="list-group-item" href="http://blog.fuxingwang.cn/blog/archives/217/">宋·张耒《示秬秸》</a>
+      <a class="list-group-item" href="http://blog.fuxingwang.cn/blog/archives/216/">《小狗钱钱》——财富的启蒙</a>
+      <a class="list-group-item" href="http://blog.fuxingwang.cn/blog/archives/215/">金蛇起舞去,骏马奔腾来</a>
+      <a class="list-group-item" href="http://blog.fuxingwang.cn/blog/archives/213/">[修正更新]xingwang-typecho-theme-1.14.1.2</a>
+      <a class="list-group-item" href="http://blog.fuxingwang.cn/blog/archives/210/">基于Bootstrap3的Typecho0.9主题</a>
+      <a class="list-group-item" href="http://blog.fuxingwang.cn/blog/archives/208/">《我讲个笑话，你可别哭啊》——消磨闲暇时光</a>
+      <a class="list-group-item" href="http://blog.fuxingwang.cn/blog/archives/207/">安装Ambari1.2.3</a>
+      <a class="list-group-item" href="http://blog.fuxingwang.cn/blog/archives/206/">Ambari 官网提供的信息内容</a>
+      <a class="list-group-item" href="http://blog.fuxingwang.cn/blog/archives/205/">Linux下查看网络配置</a>
+      <a class="list-group-item" href="http://blog.fuxingwang.cn/blog/archives/204/">个人婚礼站点源码开放</a>
+    </div>
+
+    <div class="list-group">
+      <a class="list-group-item active">最近回复</a>
+
+      <a class="list-group-item" href="http://blog.fuxingwang.cn/blog/archives/215/#comment-1063">潘知愚:来拜年了！</a>
+      <a class="list-group-item" href="http://blog.fuxingwang.cn/blog/archives/213/#comment-1062">Andrew:挺大气的风格</a>
+      <a class="list-group-item" href="http://blog.fuxingwang.cn/blog/archives/210/#comment-1061">ChrisFoon:后台的配置评论中，之前没有打开“ 评论者名称显示时自动加上其个人主页链...</a>
+      <a class="list-group-item" href="http://blog.fuxingwang.cn/blog/archives/210/#comment-1060">ChrisFoon:感谢建议。目前此问题在 1.14.1.2中已修复。</a>
+      <a class="list-group-item" href="http://blog.fuxingwang.cn/blog/archives/210/#comment-1058">
+        风尚网:这个模板不错。但是刚发现手机上的时候发表
+评论处显示不全
+      </a>
+      <a class="list-group-item" href="http://blog.fuxingwang.cn/blog/archives/210/#comment-1057">Sloger:不过你这个评论页不添加链接就有点不和谐了。。。</a>
+      <a class="list-group-item" href="http://blog.fuxingwang.cn/blog/archives/210/#comment-1056">Sloger:很不错的主题啊。赞一个</a>
+      <a class="list-group-item" href="http://blog.fuxingwang.cn/blog/archives/210/#comment-1055">isaced:感谢分享！</a>
+      <a class="list-group-item" href="http://blog.fuxingwang.cn/blog/archives/210/#comment-1054">ChrisFoon:可尝试找到主题目录下的 css/xingwang.css 删除第三行，...</a>
+      <a class="list-group-item" href="http://blog.fuxingwang.cn/blog/archives/210/#comment-1053">Andrew:正文字体有些小啊</a>
+    </div>
+
+    <div class="list-group">
+      <a class="list-group-item active">归档</a>
+      <a class="list-group-item" href="http://blog.fuxingwang.cn/blog/2014/02/">February 2014</a>
+      <a class="list-group-item" href="http://blog.fuxingwang.cn/blog/2014/01/">January 2014</a>
+      <a class="list-group-item" href="http://blog.fuxingwang.cn/blog/2013/08/">August 2013</a>
+      <a class="list-group-item" href="http://blog.fuxingwang.cn/blog/2013/07/">July 2013</a>
+      <a class="list-group-item" href="http://blog.fuxingwang.cn/blog/2013/06/">June 2013</a>
+      <a class="list-group-item" href="http://blog.fuxingwang.cn/blog/2013/03/">March 2013</a>
+      <a class="list-group-item" href="http://blog.fuxingwang.cn/blog/2013/02/">February 2013</a>
+      <a class="list-group-item" href="http://blog.fuxingwang.cn/blog/2013/01/">January 2013</a>
+      <a class="list-group-item" href="http://blog.fuxingwang.cn/blog/2012/12/">December 2012</a>
+      <a class="list-group-item" href="http://blog.fuxingwang.cn/blog/2012/11/">November 2012</a>
+      <a class="list-group-item" href="http://blog.fuxingwang.cn/blog/2012/10/">October 2012</a>
+      <a class="list-group-item" href="http://blog.fuxingwang.cn/blog/2012/09/">September 2012</a>
+      <a class="list-group-item" href="http://blog.fuxingwang.cn/blog/2012/08/">August 2012</a>
+      <a class="list-group-item" href="http://blog.fuxingwang.cn/blog/2012/07/">July 2012</a>
+      <a class="list-group-item" href="http://blog.fuxingwang.cn/blog/2012/06/">June 2012</a>
+      <a class="list-group-item" href="http://blog.fuxingwang.cn/blog/2012/05/">May 2012</a>
+      <a class="list-group-item" href="http://blog.fuxingwang.cn/blog/2012/04/">April 2012</a>
+      <a class="list-group-item" href="http://blog.fuxingwang.cn/blog/2012/03/">March 2012</a>
+      <a class="list-group-item" href="http://blog.fuxingwang.cn/blog/2012/02/">February 2012</a>
+      <a class="list-group-item" href="http://blog.fuxingwang.cn/blog/2011/11/">November 2011</a>
+      <a class="list-group-item" href="http://blog.fuxingwang.cn/blog/2011/10/">October 2011</a>
+      <a class="list-group-item" href="http://blog.fuxingwang.cn/blog/2011/09/">September 2011</a>
+      <a class="list-group-item" href="http://blog.fuxingwang.cn/blog/2011/08/">August 2011</a>
+      <a class="list-group-item" href="http://blog.fuxingwang.cn/blog/2011/07/">July 2011</a>
+      <a class="list-group-item" href="http://blog.fuxingwang.cn/blog/2011/06/">June 2011</a>
+      <a class="list-group-item" href="http://blog.fuxingwang.cn/blog/2011/01/">January 2011</a>
+      <a class="list-group-item" href="http://blog.fuxingwang.cn/blog/2010/11/">November 2010</a>
+      <a class="list-group-item" href="http://blog.fuxingwang.cn/blog/2010/10/">October 2010</a>
+      <a class="list-group-item" href="http://blog.fuxingwang.cn/blog/2010/09/">September 2010</a>
+      <a class="list-group-item" href="http://blog.fuxingwang.cn/blog/2010/07/">July 2010</a>
+      <a class="list-group-item" href="http://blog.fuxingwang.cn/blog/2010/06/">June 2010</a>
+      <a class="list-group-item" href="http://blog.fuxingwang.cn/blog/2010/05/">May 2010</a>
+      <a class="list-group-item" href="http://blog.fuxingwang.cn/blog/2010/04/">April 2010</a>
+      <a class="list-group-item" href="http://blog.fuxingwang.cn/blog/2010/03/">March 2010</a>
+      <a class="list-group-item" href="http://blog.fuxingwang.cn/blog/2010/02/">February 2010</a>
+      <a class="list-group-item" href="http://blog.fuxingwang.cn/blog/2010/01/">January 2010</a>
+      <a class="list-group-item" href="http://blog.fuxingwang.cn/blog/2009/12/">December 2009</a>
+      <a class="list-group-item" href="http://blog.fuxingwang.cn/blog/2009/11/">November 2009</a>
+      <a class="list-group-item" href="http://blog.fuxingwang.cn/blog/2009/10/">October 2009</a>
+      <a class="list-group-item" href="http://blog.fuxingwang.cn/blog/2009/09/">September 2009</a>
+      <a class="list-group-item" href="http://blog.fuxingwang.cn/blog/2009/08/">August 2009</a>
+      <a class="list-group-item" href="http://blog.fuxingwang.cn/blog/2009/07/">July 2009</a>
+    </div>
+
+    <div class="list-group">
+      <a class="list-group-item active">其它</a>
+
+      <a class="list-group-item" href="http://blog.fuxingwang.cn/blog/admin/login.php">登录</a>
+      <a class="list-group-item" href="http://blog.fuxingwang.cn/blog/feed/">文章 RSS</a>
+      <a class="list-group-item" href="http://blog.fuxingwang.cn/blog/feed/comments/">评论 RSS</a>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<div class="container">
+<div class="row">
+  <div class="span6">{{template "flash.html" .}}</div>
+</div>
+</div>
+{{template "footer.html" .}}

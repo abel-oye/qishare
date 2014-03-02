@@ -1,0 +1,43 @@
+  {{if eq .RunMode "dev"}}
+    {{template "debug.html" .}}
+  {{end}}
+<footer>
+    <div class="footer-bottom">
+      <div class="container">
+        <div class="pull-left copyright">
+          Copyright © 2014&nbsp;QiShare 
+        </div>
+        <ul class="footer-nav pull-right">
+          <li><a href="http://typecho.org/">Typecho)))强力驱动</a></li>
+          <li><a href="http://www.miibeian.gov.cn">京ICP备13003429号</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="/public/js/jquery-1.9.1.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="/public/js/bootstrap.min.js"></script>
+    <script src="/public/js/jquery.scrollUp.min.js"></script>
+
+    <script>
+    $(document).ready(function(){
+      $('.comment-list').addClass("list-group");
+      $('.comment-parent').addClass("list-group-item");
+      $('.comment-body').addClass("thumbnail");
+      $('.comment-author').addClass('pull-left');
+      $('.comment-meta').addClass('pull-right');
+      $('#captcha input').addClass('form-control pull-left');
+      $('#captcha img').addClass('pull-right');
+      $('#captcha br').remove();
+      $('#captcha strong').remove();
+    });
+    $.scrollUp({
+      scrollImg: true,
+      scrollText: "回顶部"
+    });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,115 @@
+
+  <!DOCTYPE html>  
+  <html lang="zh-cn">
+  <head>
+    <!-- Meta, title, CSS, favicons, etc. -->  
+    <meta charset="UTF-8">  
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+
+    <meta name="description" content="齐享，向世界齐分享" />  
+    <meta name="keywords" content="qishare,齐享" />  
+    <meta name="generator" content="Typecho 0.9/13.12.12" />  
+    <meta name="template" content="qishare" />  
+    <title>{{.title}}</title>
+
+    <link href="/public/css/bootstrap.min.css?v=1393086698" rel="stylesheet">  
+    <link href="/public/css/font-awesome.min.css?v=1393086698" rel="stylesheet">  
+    <link href="/public/css/xingwang.css?v=1393086698" rel="stylesheet">  
+    <style>
+  .billboard {
+    background: url(/public/img/billboard.jpg) center -20px repeat-x;
+    background-size: cover;
+    padding: 120px 0 70px;
+  }
+  .page404{
+    background: url(/public/img/404-3.jpg) center -20px repeat-x;
+    background-size: cover;
+    padding: 120px 0px 200px 0px;
+    color: #FFF;
+  }
+  
+  #scrollUp {
+    bottom: 20px;
+    right: 20px;
+    width: 38px; /* Width of image */
+    height: 38px; /* Height of image */
+    background: url(/public/img/top.png) no-repeat;
+  }
+  </style>
+    <!--[if lt IE 9]>  
+    <script src="http://blog.fuxingwang.cn/blog/admin/js/ie8-responsive-file-warning.js"></script>
+    <![endif]-->  
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->  
+    <!--[if lt IE 9]>  
+    <script src="http://blog.fuxingwang.cn/blog/admin/js/html5shiv.js"></script>
+    <script src="http://blog.fuxingwang.cn/blog/admin/js/respond.js"></script>
+    <![endif]-->  
+
+    <!-- Favicons -->  
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="public/img/favicon.ico">  
+    <link rel="shortcut icon" href="/public/img/favicon.ico"></head>
+  <body>
+    <header>
+      <div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" id="logo" href="/">齐享</a>
+          </div>
+          <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+              <li  class="active" >
+                <a href="/">首页</a>
+              </li>
+              <!--顶部导航显示分类-->  
+              <li  >
+                <a href="" title="齐想">齐想</a>
+              </li>
+              <li  >
+                <a href="" title="齐乐">齐乐</a>
+              </li>
+              <!--END-->  
+              <!--顶部导航显示独立页-->  
+              <form class=" navbar-form pull-right" id="search" method="post" action="./" role="search" style="width:250px">
+                <div class="input-group">
+                  <input type="text" placeholder="搜索" class="form-control" name="s">  
+                  <span class="input-group-btn">
+                    <button class="btn btn-default" type="submit"> <i class="fa fa-search"></i>
+                    </button>
+                  </span>
+                </div>
+                <!-- /input-group --> </form>
+              <!--END--> </ul>
+            <ul class=" nav navbar-nav pull-right">
+              {{if .session.isLogin}}
+                 <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    {{.session.userName}} 
+                    <b class="caret"></b>
+                  </a>
+                  <ul class="dropdown-menu">
+                      <li><a href="">个人中心</a></li>
+                      <li><a href="/logOut">退出</a></li>
+                  </ul>
+                </li>    
+              {{else}}
+                <li  >
+                <a href="/signUp" title="注册">注册</a>
+              </li>
+              <li  >
+                <a href="/signIn" title="登录">登录</a>
+              </li>  
+              {{end}}                    
+               
+            </ul>
+          </div>
+          <!-- /.nav-collapse --> </div>
+        <!-- /.container --> </div>
+      <!-- /.navbar --> </header>
